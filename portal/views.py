@@ -5,6 +5,29 @@ from.models import CustomUserModel
 def home(request):
     return render(request,'home.html')
 
+def about(request):
+    return render(request,'about.html')
+
+def courses(request):
+    course_list = [
+        {
+            'title': 'Web Development with Django',
+            'description': 'Learn HTML, CSS, Bootstrap, and Django to build full-stack web apps.',
+            'badge': 'Popular'
+        },
+        {
+            'title': 'Python Programming Basics',
+            'description': 'Master core Python programming fundamentals from beginner to advanced level.',
+            'badge': 'New'
+        },
+        {
+            'title': 'Frontend Web Design',
+            'description': 'Create responsive websites using Bootstrap 5, HTML5, and CSS3.',
+            'badge': 'Featured'
+        }
+    ]
+    return render(request, 'courses.html', {'courses': course_list})
+
 def dashboard(request):
     return render(request, 'dashboard.html')
 

@@ -20,6 +20,8 @@ from portal import views
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('about/',views.about,name='about'),
+    path('courses/',views.courses,name='courses'),
     path('dashboard/', views.dashboard, name='dashboard'),
 
     path('admin/', admin.site.urls),
