@@ -1,0 +1,55 @@
+{% extends 'master/base.html' %}
+
+{% block content %}
+<div style="max-width:1200px; margin:40px auto; padding:0 20px;">
+    
+    <!-- Header -->
+    <div style="text-align:center; margin-bottom:40px;">
+        <h1 style="font-size:36px; font-weight:bold; color:#2d3436;">সকল কোর্স</h1>
+        <p style="color:#636e72; font-size:16px; margin-top:10px;">তোমার পছন্দের কোর্স বেছে নিয়ে আজই শেখা শুরু করো</p>
+        <div style="width:80px; height:4px; background:#6c5ce7; margin:15px auto; border-radius:2px;"></div>
+    </div>
+
+    <!-- Filter / Search (Design Only) -->
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px; margin-bottom:30px; background:white; padding:15px 20px; border-radius:12px; box-shadow:0 2px 10px rgba(0,0,0,0.05);">
+        <p style="margin:0; font-weight:500;">মোট কোর্স: <span style="color:#6c5ce7; font-weight:bold;">{{ courses.count }}</span> টি</p>
+        <a href="/" style="text-decoration:none; color:#0984e3; font-weight:500;">← হোমে ফিরে যাও</a>
+    </div>
+
+    <!-- Courses Grid -->
+    <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap:25px;">
+        
+        {% for course in courses %}
+        <div style="background:white; border-radius:16px; box-shadow:0 5px 20px rgba(0,0,0,0.07); overflow:hidden; transition:all 0.3s; border:1px solid #f1f2f6;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0px)'">
+            <!-- Image Part -->
+            <div style="height:190px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display:flex; align-items:center; justify-content:center; color:white; font-size:18px; font-weight:bold; position:relative;">
+                <span style="font-size:50px;">📚</span>
+                {% if course.category %}
+                <span style="position:absolute; top:15px; left:15px; background:white; color:#6c5ce7; padding:4px 10px; border-radius:20px; font-size:12px; font-weight:bold;">{{ course.category.name }}</span>
+                {% endif %}
+            </div>
+            
+            <!-- Content Part -->
+            <div style="padding:20px;">
+                <h3 style="font-size:18px; font-weight:bold; margin-bottom:8px; color:#2d3436; line-height:1.4;">{{ course.title }}</h3>
+                <p style="font-size:13px; color:#636e72; margin-bottom:8px;">👨‍🏫 {{ course.teacher.username }}</p>
+                <p style="color:#636e72; font-size:14px; height:42px; overflow:hidden; line-height:1.5; margin-bottom:15px;">{{ course.description|truncatewords:18 }}</p>
+                
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <p style="font-weight:bold; color:#6c5ce7; font-size:20px; margin:0;">৳ {{ course.price }}</p>
+                    <a href="{% url 'course_detail' course.slug %}" style="background:#6c5ce7; color:white; padding:8px 18px; border-radius:8px; text-decoration:none; font-size:14px; font-weight:500;">দেখো</a>
+                </div>
+            </div>
+        </div>
+
+        {% empty %}
+        <div style="grid-column: 1/-1; text-align:center; padding:80px 20px; background:white; border-radius:16px; box-shadow:0 5px 15px rgba(0,0,0,0.05);">
+            <div style="font-size:70px; margin-bottom:20px;">😕</div>
+            <h3 style="color:#2d3436; margin-bottom:10px;">কোনো কোর্স পাওয়া যায়নি</h3>
+            <p style="color:#636e72; margin-bottom:20px;">Admin Panel থেকে কোর্স Add করো এবং "Is Published" এ টিক দাও।</p>
+            <a href="/admin/" style="background:#6c5ce7; color:white; padding:10px 20px; border-radius:8px; text-decoration:none;">Admin এ যাও</a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

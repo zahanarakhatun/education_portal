@@ -14,19 +14,19 @@ def home(request):
 # 2. All Courses
 def course_list(request):
     courses = Course.objects.filter(is_published=True)
-    return render(request, 'courses/list.html', {'courses': courses})
+    return render(request, 'list.html', {'courses': courses})
 
 # 3. Single Course Detail
 def course_detail(request, slug):
     course = get_object_or_404(Course, slug=slug)
     lessons = course.lessons.all()
-    return render(request, 'courses/detail.html', {'course': course, 'lessons': lessons})
+    return render(request, 'detail.html', {'course': course, 'lessons': lessons})
 
 # 4. Lesson Detail
 @login_required
 def lesson_detail(request, course_slug, lesson_id):
     lesson = get_object_or_404(Lesson, id=lesson_id)
-    return render(request, 'courses/lesson.html', {'lesson': lesson})
+    return render(request, 'lesson.html', {'lesson': lesson})
 
 # 5. Enroll
 @login_required
@@ -39,24 +39,24 @@ def enroll_course(request, slug):
 @login_required
 def my_courses(request):
     enrolls = Enrollment.objects.filter(student=request.user)
-    return render(request, 'courses/my_courses.html', {'enrolls': enrolls})
+    return render(request, 'my_courses.html', {'enrolls': enrolls})
 
 # 7. Teacher Dashboard
 @login_required
 def teacher_dashboard(request):
     my_courses = Course.objects.filter(teacher=request.user)
-    return render(request, 'teacher/dashboard.html', {'my_courses': my_courses})
+    return render(request, 'dashboard.html', {'my_courses': my_courses})
 
 def create_course(request):
-    return render(request, 'teacher/create.html')
+    return render(request, 'create.html')
 
 def edit_course(request, slug):
     course = get_object_or_404(Course, slug=slug)
-    return render(request, 'teacher/edit.html', {'course': course})
+    return render(request, 'edit.html', {'course': course})
 
 def add_lesson(request, slug):
     course = get_object_or_404(Course, slug=slug)
-    return render(request, 'teacher/add_lesson.html', {'course': course})
+    return render(request, 'add_lesson.html', {'course': course})
 
 # 8. Register
 def register(request):

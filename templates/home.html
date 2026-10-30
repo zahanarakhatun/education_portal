@@ -1,8 +1,48 @@
 {% extends 'master/base.html' %}
+
 {% block content %}
-<div style="background:linear-gradient(135deg,#00c6ff,#0072ff);color:white;padding:100px 0" class="text-center">
-  <h1>তোমার পারফেক্ট টিউটর খুঁজে নাও</h1>
-  <p>যাচাই করা টিউটর | নিরাপদ পেমেন্ট</p>
-  <a href="/register" class="btn btn-light btn-lg rounded-pill mt-3">এখনই শুরু করো</a>
+<!-- Hero Section - তোমার যে নীলটা আছে -->
+<div style="background: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%); padding: 80px 20px; text-align:center; color:white;">
+    <h1 style="font-size:42px; font-weight:bold; margin-bottom:15px;">তোমার পারফেক্ট টিউটর খুঁজে নাও</h1>
+    <p style="font-size:18px; margin-bottom:25px;">যাচাই করা টিউটর | নিরাপদ পেমেন্ট</p>
+    <a href="/courses/" style="background:white; color:#0072ff; padding:12px 25px; border-radius:30px; text-decoration:none; font-weight:bold; display:inline-block;">এখনই শুরু করো</a>
 </div>
+
+<!-- Courses Section -->
+<div style="max-width:1200px; margin:50px auto; padding:0 20px;">
+    <h2 style="text-align:center; font-size:32px; margin-bottom:30px;">জনপ্রিয় কোর্স সমূহ</h2>
+    
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:20px;">
+        {% for course in courses %}
+        <div style="background:white; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.1); overflow:hidden; transition:0.3s;">
+            <div style="height:180px; background:#f1f2f6; display:flex; align-items:center; justify-content:center; font-size:50px;">📚</div>
+            <div style="padding:20px;">
+                <h3 style="margin-bottom:10px;">{{ course.title }}</h3>
+                <p style="color:#636e72; font-size:14px; height:40px; overflow:hidden;">{{ course.description|truncatewords:15 }}</p>
+                <p style="margin:10px 0; font-weight:bold; color:#6c5ce7;">৳ {{ course.price }}</p>
+                <a href="/courses/{{ course.slug }}/" style="display:block; text-align:center; background:#6c5ce7; color:white; padding:10px; border-radius:8px; text-decoration:none;">বিস্তারিত দেখো</a>
+            </div>
+        </div>
+        {% empty %}
+        <div style="grid-column: 1/-1; text-align:center; padding:50px; background:white; border-radius:15px;">
+            <h3>এখনো কোনো কোর্স Add করা হয়নি!</h3>
+            <p>Admin Panel এ যাও: <a href="/admin/" target="_blank">/admin/</a> এ গিয়ে Course Add করো এবং "Is Published" এ টিক দাও।</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div style="text-align:center; margin-top:40px;">
+        <a href="/courses/" style="background:#0984e3; color:white; padding:12px 30px; border-radius:8px; text-decoration:none;">সব কোর্স দেখো</a>
+    </div>
+</div>
+
+<!-- Why Choose Us -->
+<div style="background:#f8f9fa; padding:60px 20px; margin-top:50px;">
+    <div style="max-width:1200px; margin:0 auto; display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:30px; text-align:center;">
+        <div><h2>✅</h2><h3>যাচাই করা টিউটর</h3><p>সকল টিউটর যাচাই বাছাই করা</p></div>
+        <div><h2>🔒</h2><h3>নিরাপদ পেমেন্ট</h3><p>100% নিরাপদ লেনদেন</p></div>
+        <div><h2>🎥</h2><h3>লাইফটাইম এক্সেস</h3><p>একবার কিনলেই আজীবন</p></div>
+    </div>
+</div>
+
 {% endblock %}
