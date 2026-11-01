@@ -13,7 +13,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts',  # <-- এটা তুমি যোগ করোনি, এটা মাস্ট
+    'accounts',  # <-- ata app--->
+    'tutorsapp',
 ]
 
 MIDDLEWARE = [
